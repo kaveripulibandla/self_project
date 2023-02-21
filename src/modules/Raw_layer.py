@@ -15,16 +15,18 @@ def create_rawlayer():
 
     df.printSchema()
     df.show(truncate=False)
-    df.write.mode("overwrite").format("csv").option("header", True)\
-        .save("C:\\self_project\\src\\internal_files\\raw_sales_file.csv")
+    # df.write.mode("overwrite").format("csv").option("header", True)\
+        # .save("C:\\self_project\\internal_files\\raw_sales_file.csv")
 
+    df.coalesce(1).write.mode("overwrite").format('csv') \
+        .option("header", True).save("C:\\self_project\\internal_files\\sales_raw_file.csv")
 
     # """"" # RAW_DATA HIVE TABLE """""
-    # df.coalesce(1).write.mode("overwrite").saveAsTable("raw_retail_details")
-    # df_log = spark.sql("select * from raw_retail_details")
+    # df.coalesce(1).write.mode("overwrite").saveAsTable("raw_sales_data")
+    # df_log = spark.sql("select * from raw_sales_data")
     # df_log.show()
     #
-    # df_log = spark.sql("select count(*) from raw_retail_details")
+    # df_log = spark.sql("select count(*) from raw_sales_data")
     # df_log.show()
 
 
